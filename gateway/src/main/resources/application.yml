@@ -1,0 +1,37 @@
+server:
+  port: ${SERVER_PORT}
+
+eureka:
+  client:
+    fetch-registry: true
+    register-with-eureka: true
+    service-url:
+      defaultZone: ${EUREKA_URL}
+spring:
+  application:
+    name: dankan-gateway
+  cloud:
+    gateway:
+      enabled: true
+      routes:
+        - id: user
+          uri: http://localhost:8080/
+          predicates:
+            - Path=/user/**
+  datasource:
+    url: jdbc:mysql://13.124.192.194:51011/staging?allowPublicKeyRetrieval=true&useSSL=false&serverTimezone=Asia/Seoul&characterEncoding=UTF-8
+    username: root
+    password: dankan123456
+    driver-class-name:
+  jpa:
+    database: mysql
+    database-platform: org.hibernate.dialect.MySQL8Dialect
+    hibernate:
+      ddl-auto: none #create, create-drop, none, update
+      naming:
+        physical-strategy: org.springframework.boot.orm.jpa.hibernate.SpringPhysicalNamingStrategy # set DB column name by snake case
+    show-sql: true
+    generate-ddl: true
+jwt:
+  secret: aKDYhaH2zGcfYNttnes8zfgldpkynLqn+waoAfmn2J5diiBtQNJlzVp0PpB5JHZ2S/7pzH24wvmSzvev65c89bf8YYE+4S8dNOY2bEjniNgQDF6SZBrX/jW+h4uZsEZCYefPPOMh9zZYmKoXU5x5OnVZJRuOPym26szedZv3hE7jOm7JOK90MIdpuC7SMcikjcPAhCX0uavV/kAOgxSeRR8KzSEqpRqrg8J33KLr90FjpIROlhxQPqMFcr5T8s9sr9sIktK1w0Tvyj84UEGMXLYSzTMnR63x8qroIryHDlpPfq+J3i8JDYYkGEi3C63Ro/Ocp4gu8d5jsfOCRuGsKg==
+
