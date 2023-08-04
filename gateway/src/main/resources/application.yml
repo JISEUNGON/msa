@@ -6,7 +6,7 @@ eureka:
     fetch-registry: true
     register-with-eureka: true
     service-url:
-      defaultZone: http://localhost:8673/eureka
+      defaultZone: http://localhost:8761/eureka
 spring:
   application:
     name: dankan-gateway
@@ -23,6 +23,11 @@ spring:
             - Path=/user/**
           filters:
             - JwtUserFilter
+
+        - id: no-authority
+          uri: lb://USER
+          predicates:
+            - Path=/auth/**, login/**, /token/**
 
 jwt:
   secret: aKDYhaH2zGcfYNttnes8zfgldpkynLqn+waoAfmn2J5diiBtQNJlzVp0PpB5JHZ2S/7pzH24wvmSzvev65c89bf8YYE+4S8dNOY2bEjniNgQDF6SZBrX/jW+h4uZsEZCYefPPOMh9zZYmKoXU5x5OnVZJRuOPym26szedZv3hE7jOm7JOK90MIdpuC7SMcikjcPAhCX0uavV/kAOgxSeRR8KzSEqpRqrg8J33KLr90FjpIROlhxQPqMFcr5T8s9sr9sIktK1w0Tvyj84UEGMXLYSzTMnR63x8qroIryHDlpPfq+J3i8JDYYkGEi3C63Ro/Ocp4gu8d5jsfOCRuGsKg==
