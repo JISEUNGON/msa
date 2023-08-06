@@ -35,6 +35,19 @@ cloud:
       static: ap-northeast-2
     stack:
       auto: false
+sns:
+  kakao:
+    key: 00c48270395b6a27deb3c5a044c1407f
+    url: http://localhost:8080/login/kakao/token
+
+sms:
+  key: NCSAW8M8DY0K0BIJ
+  secret: VNOCKLFUD236WQEDSQIICSVADBRZBLCJ
+  phoneNumber: 010-9210-2745
+
+mail:
+  id: dankan2023@naver.com
+  password: ekszks0617!
 
 eureka:
   client:

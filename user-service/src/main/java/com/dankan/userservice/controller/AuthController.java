@@ -15,11 +15,6 @@ import java.util.List;
 public class AuthController {
     private final UserService userService;
 
-    @GetMapping("/ping")
-    public String pong() {
-        return "pong";
-    }
-
     @GetMapping("/check")
     public ResponseEntity<List<String>> getAuthorities() {
         return ResponseEntity.ok(userService.getAuthorities());

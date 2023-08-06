@@ -93,13 +93,17 @@ public class UserServiceImpl implements UserService {
                 .authorityName("ROLE_USER")
                 .build();
 
+        Authority authority1 = Authority.builder()
+                .authorityName("ROLE_ADMIN")
+                .build();
+
         //날짜 로그
         DateLog dateLog = DateLog.of(id);
 
         User user = User.builder()
                 .userId(id)
                 .dateId(dateLogRepository.save(dateLog).getId())
-                .authorities(Arrays.asList(authority))
+                .authorities(Arrays.asList(authority, authority1))
                 .email(oauthLoginResponseDto.getEmail())
                 .nickname(oauthLoginResponseDto.getNickname())
                 .profileImg(oauthLoginResponseDto.getProfileImg())
@@ -133,7 +137,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public UserResponseDto findUser(String name) {
+    public UserResponseDto findByNickname(String name) {
         return userRepository.findByNickname(name).orElseThrow(
                 () -> new UserNameNotFoundException(name)
         );

@@ -1,8 +1,14 @@
 package com.dankan.userservice.controller;
 
+import com.dankan.userservice.dto.request.email.EmailCodeRequestDto;
+import com.dankan.userservice.dto.request.email.EmailRequestDto;
+import com.dankan.userservice.dto.request.sns.CertificationRequestDto;
+import com.dankan.userservice.dto.request.sns.SendMessageRequestDto;
 import com.dankan.userservice.dto.response.logout.LogoutResponseDto;
 import com.dankan.userservice.dto.response.user.UserResponseDto;
+import com.dankan.userservice.service.email.EmailService;
 import com.dankan.userservice.service.s3.S3UploadService;
+import com.dankan.userservice.service.sms.SmsService;
 import com.dankan.userservice.service.user.UserService;
 import com.dankan.userservice.util.JwtUtil;
 import lombok.AllArgsConstructor;
@@ -19,11 +25,8 @@ import java.io.IOException;
 public class UserController {
     private final UserService userService;
     private final S3UploadService s3UploadService;
-
-    @GetMapping("/ping")
-    public String pong() {
-        return "pong";
-    }
+    private final SmsService smsService;
+    private final EmailService emailService;
 
     @GetMapping("/nickname")
     public ResponseEntity<Boolean> checkDuplicatedNickname(@RequestParam(value = "name") String name) {
@@ -69,5 +72,18 @@ public class UserController {
     @GetMapping("/logout")
     public ResponseEntity<LogoutResponseDto> logout() {
         return ResponseEntity.ok(userService.logout());
+    }
+
+
+    @PostMapping("/message")
+    public ResponseEntity sendIdentifyMessage(@RequestBody SendMessageRequestDto SendMessageRequestDto) {
+        smsService.sendMessage(SendMessageRequestDto.getPhoneNumber());
+
+        return ResponseEntity.ok().build();
+    }
+
+    @PostMapping("/verify")
+    public ResponseEntity<Boolean> verifyUser(@RequestBody CertificationRequestDto certificationRequestDto) {
+        return ResponseEntity.ok(smsService.verifyNumber(certificationRequestDto));
     }
 }

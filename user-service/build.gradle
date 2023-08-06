@@ -60,6 +60,13 @@ dependencies {
 
     //cache
     implementation 'org.springframework.boot:spring-boot-starter-cache'
+
+    //coolsms
+    implementation 'net.nurigo:sdk:4.3.0'
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+
+    //spring boot send mail
+    implementation 'org.springframework.boot:spring-boot-starter-mail'
 }
 
 dependencyManagement {

@@ -72,7 +72,7 @@ public class JwtAdminFilter extends AbstractGatewayFilterFactory<JwtAdminFilter.
             else {
                 response.setStatusCode(HttpStatus.UNAUTHORIZED);
                 // 응답 내용 수정
-                String modifiedResponse = "User does not have permission.";
+                String modifiedResponse = "Token is not admin token.";
                 DataBuffer newResponseData = response.bufferFactory().wrap(modifiedResponse.getBytes(StandardCharsets.UTF_8));
                 response.getHeaders().setContentLength(modifiedResponse.length());
 

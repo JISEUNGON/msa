@@ -49,9 +49,7 @@ public class TokenServiceImpl implements TokenService {
     }
 
     @Override
-    public TokenResponseDto findByUserId(final Long id) {
-        Token token = tokenRepository.findByUserId(id).orElseThrow(() -> new TokenNotFoundException(id.toString()));
-
-        return TokenResponseDto.of(token);
+    public Token findByUserId(final Long id) {
+        return tokenRepository.findByUserId(id).orElseThrow(() -> new TokenNotFoundException(id.toString()));
     }
 }

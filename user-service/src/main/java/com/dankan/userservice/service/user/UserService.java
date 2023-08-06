@@ -19,7 +19,7 @@ public interface UserService {
     public LoginResponseDto signIn(User user);
     public UserResponseDto findUser();
     public List<UserResponseDto> findAll();
-    public UserResponseDto findUser(String name);
+    public UserResponseDto findByNickname(String name);
     public void deleteUser();
     public void deleteUser(String name);
     public LogoutResponseDto logout();
