@@ -21,7 +21,10 @@ public class User {
     @Column(name = "date_id", nullable = false, columnDefinition = "int")
     private Long dateId;
 
-    @Column(nullable = false, unique = true,length = 16,columnDefinition = "varchar")
+    @Column(name = "name", nullable = false, length = 10, columnDefinition = "varchar")
+    private String name;
+
+    @Column(length = 16,columnDefinition = "varchar")
     private String nickname;
 
     @Column(nullable = false, unique = true,length = 40,columnDefinition = "varchar")
